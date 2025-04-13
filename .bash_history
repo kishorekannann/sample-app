@@ -59,3 +59,27 @@ for file in cloudbuild-dev.yaml cloudbuild.yaml; do     sed -i "s/<your-region>/
 export REGION="us-central1"
 export ZONE="us-central1-c"
 for file in sample-app/cloudbuild-dev.yaml sample-app/cloudbuild.yaml; do     sed -i "s/<your-region>/${REGION}/g" "$file";     sed -i "s/<your-zone>/${ZONE}/g" "$file"; done
+git add .
+git commit -m "Initial commit with sample Go application"
+git push origin master
+git remote add origin https://github.com/kishorekannann/sample-app.git
+git remote -v
+git push -u origin master
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch .kube/gke_gcloud_auth_plugin_cache .config/gh/hosts.yml' --prune-empty --tag-name-filter cat -- --all
+git push -u origin master
+git checkout -b dev
+git push -u origin dev
+git checkout -b dev
+git push -u origin dev
+gh auth login
+git push -u origin dev
+cd sample-app
+git checkout -b dev
+git add .
+git commit -m "Initial commit with sample Go app on dev branch"
+git checkout dev
+cd ~
+gsutil cp -r gs://spls/gsp330/sample-app/* sample-app
+export REGION="us-central1"
+export ZONE="us-central1-c"
+for file in sample-app/cloudbuild-dev.yaml sample-app/cloudbuild.yaml; do     sed -i "s/<your-region>/${REGION}/g" "$file";     sed -i "s/<your-zone>/${ZONE}/g" "$file"; done
