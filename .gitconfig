@@ -1,0 +1,9 @@
+[user]
+	email = student-03-ced93570f895@qwiklabs.net
+	name = student
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
